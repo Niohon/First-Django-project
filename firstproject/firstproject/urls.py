@@ -13,10 +13,17 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-import sys
+# import sys
+# import pprint
 
-sys.path.append('D:/Python/First django project/firstproject')
-print(sys.path)
+# sys.path.append('D:\\Python\\First django project\\firstproject\\testapp')
+# pprint.pprint(sys.path)
+
+# import os
+# import django
+
+# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'firstproject.settings')
+# django.setup()
 
 from testapp.views import index_page
 from django.contrib import admin
