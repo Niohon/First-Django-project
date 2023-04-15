@@ -14,7 +14,15 @@ def index_page(request):
     # new_worker = Worker(name="Виктория", second_name="Шевцвоа", salary=12000)
     # new_worker.save()
 
-    all_workers = Worker.objects.all()
-    print(all_workers, "HI")
+    # worker_to_change = Worker.objects.get(id=2)
+    # worker_to_change.salary = 21000
+    # worker_to_change.save()
+    # worker_to_change.delete()
 
-    return render(request, 'index.html')
+    all_workers = Worker.objects.all()
+    workers_info = []
+    for i in all_workers:
+        print(f"Имя: {i.name} Фамилия: {i.second_name} Зарплата: {i.salary} ID: {i.id}")
+        workers_info.append(f"Имя: {i.name} Фамилия: {i.second_name} Зарплата: {i.salary} ID: {i.id} ")
+
+    return render(request, 'index.html', context={'data': workers_info})

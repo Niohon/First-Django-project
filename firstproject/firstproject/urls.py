@@ -24,15 +24,13 @@ Including another URLconf
 
 # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'firstproject.settings')
 # django.setup()
-
 from testapp.views import index_page
 from django.contrib import admin
 from django.urls import include, path
 
 
-
 urlpatterns = [
-    path('', index_page),
+    path('', include('testapp.urls')),
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls)
 ]
