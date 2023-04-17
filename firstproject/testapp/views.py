@@ -1,5 +1,5 @@
-from django.http import HttpResponse, HttpResponseNotFound
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseNotFound, Http404
+from django.shortcuts import render, redirect
 from testapp.models import Worker
 
 
@@ -24,9 +24,23 @@ def index_page(request):
     return render(request, 'index.html', context={'data': workers_info})
 
 
-def numbers(request, testid):
-    return HttpResponse(f"<h1>Год рождения: </h1><p>{testid}</p>")
+def numbers(request, year):
+    if int(year) > 2023:
+        return redirect('home', permanent=False)
+    return HttpResponse(f"<h1>Год рождения: </h1><p>{year}</p>")
 
+
+def delete_all_workers(request):
+    all_workers = Worker.objects.all()
+    deleted_workers = []
+    for i in all_workers:
+        print(f"Имя: {i.name} Фамилия: {i.second_name} Зарплата: {i.salary} ID: {i.id} был удалён")
+        deleted_workers.append(f"{i.id}. {i.name} {i.second_name}")
+        i.delete()
+        # worker_to_delete.delete()
+
+    return render(request, 'deleted.html', context={'data': deleted_workers})
 
 def pageNotFound(request, exception):
     return HttpResponseNotFound("<h1>Страница не найдена</h1>")
+

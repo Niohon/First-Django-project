@@ -2,7 +2,8 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('testapp/<int:testid>/', numbers),
-    path('', index_page),
+    path('testapp/<int:year>/', numbers),
+    path('', index_page, name='home'),
+    path('delete/', delete_all_workers)
 
 ]
