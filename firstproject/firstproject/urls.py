@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 # import sys
 # import pprint
 
@@ -27,6 +28,8 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import include, path
+
+from firstproject import settings
 from testapp.views import pageNotFound
 
 urlpatterns = [
@@ -34,5 +37,10 @@ urlpatterns = [
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls)
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
 
 handler404 = pageNotFound

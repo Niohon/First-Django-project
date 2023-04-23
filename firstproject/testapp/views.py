@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render, redirect
-from testapp.models import Worker
+from testapp.models import *
 
 
 def index_page(request):
@@ -21,7 +21,7 @@ def index_page(request):
     if request.GET:
         print(request.GET)
 
-    return render(request, 'index.html', context={'data': workers_info})
+    return render(request, 'testapp/index.html', context={'data': workers_info})
 
 
 def numbers(request, year):
@@ -39,7 +39,8 @@ def delete_all_workers(request):
         i.delete()
         # worker_to_delete.delete()
 
-    return render(request, 'deleted.html', context={'data': deleted_workers})
+    return render(request, 'testapp/deleted.html', context={'data': deleted_workers})
+
 
 def pageNotFound(request, exception):
     return HttpResponseNotFound("<h1>Страница не найдена</h1>")
