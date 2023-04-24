@@ -2,6 +2,7 @@ from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render, redirect
 from testapp.models import *
 
+menu = ["О сайте", "Добавить статью", "Обратная связь", "Войти"]
 
 def index_page(request):
     # new_worker = Worker(name="Виктория", second_name="Шевцвоа", salary=12000)
@@ -12,16 +13,14 @@ def index_page(request):
     # worker_to_change.save()
     # worker_to_change.delete()
 
-    all_workers = Worker.objects.all()
-    workers_info = []
-    for i in all_workers:
-        print(f"Имя: {i.name} Фамилия: {i.second_name} Зарплата: {i.salary} ID: {i.id}")
-        workers_info.append(f"Имя: {i.name} Фамилия: {i.second_name} Зарплата: {i.salary} ID: {i.id} ")
+    posts = Women.objects.all()
 
     if request.GET:
         print(request.GET)
 
-    return render(request, 'testapp/index.html', context={'data': workers_info})
+    return render(request, 'testapp/index.html', context={'title': 'Главнвя страница',
+                                                          'menu': menu,
+                                                          'posts': posts})
 
 
 def numbers(request, year):
@@ -39,8 +38,10 @@ def delete_all_workers(request):
         i.delete()
         # worker_to_delete.delete()
 
-    return render(request, 'testapp/deleted.html', context={'data': deleted_workers})
+    return render(request, 'testapp/deleted.html', context={'title': 'Удалить всех работников', 'data': deleted_workers})
 
+def about(request):
+    return render(request, 'testapp/about.html', context={'title': 'about'})
 
 def pageNotFound(request, exception):
     return HttpResponseNotFound("<h1>Страница не найдена</h1>")

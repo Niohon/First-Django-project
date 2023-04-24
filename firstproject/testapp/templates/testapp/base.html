@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+</head>
+<body>
+{% block main_menu %}
+<ul>
+    {%for m in menu%}
+    <li>{{m}}</li>
+    {%endfor%}
+</ul>
+{% endblock main_menu %}
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>
